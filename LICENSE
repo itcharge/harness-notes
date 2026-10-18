@@ -1,0 +1,23 @@
+Harness 笔记许可
+
+Copyright (c) 2026 ITCharge
+
+本仓库按内容类型分别授权，两种许可互不替代。
+
+1. 教程正文与说明文档
+
+   范围：`docs/`、`chapters/`、`extra/` 中的文字，以及根目录 `README.md` 等说明文档。
+   许可：Creative Commons Attribution-NonCommercial-NoDerivatives 4.0 International
+         （知识共享署名-非商业性使用-禁止演绎 4.0 国际）
+   全文：LICENSE-CONTENT
+   说明：https://creativecommons.org/licenses/by-nc-nd/4.0/deed.zh
+
+2. 程序代码
+
+   范围：`codes/`、`docs/.vitepress/`、`.github/` 中的程序与配置，以及仓库内其他可执行源码。
+   许可：MIT License
+   全文：LICENSE-CODE
+
+从正文提取到 `codes/` 的代码块，按 MIT 许可使用。这些文件须与正文逐字节一致，因此文件内部不再另插许可头。
+
+向本仓库提交的文字修改，并入后仍以 CC BY-NC-ND 4.0 发布；代码修改并入后仍以 MIT 发布。

@@ -1,57 +1,194 @@
-<h1 align="center"> 项目名称（⚠️ Alpha内测版 / 🧪 Beta公测版） </h1>
+# Harness 笔记：从零开始手写一个能上线的 Agent
 
-> [!CAUTION]
-> ⚠️ Alpha内测版本警告：此为早期内部构建版本，尚不完整且可能存在错误，欢迎大家提Issue反馈问题或建议。
+一套从零手写 Agent 的中文工程教程。贯穿项目 Harnex 从大约 75 行代码写起，逐步补上工具、技能包、记忆、检索、评测、沙箱、审批、多用户和分发，最后成为一个能部署、能扩展、能交给别人用的 Agent。
 
-或者
 
-> [!WARNING]
-> 🧪 Beta公测版本提示：教程主体已完成，正在优化细节，欢迎大家提Issue反馈问题或建议。
+## 这是什么
 
-*这里写项目的各类介绍信息、背景、动机等内容*
+Harnex 是这套教程里唯一跟做的项目。它是一套 Agent 运行底座：同一个循环可以装上不同的工具、技能包、任务和客户端。
 
-## 项目受众
+名字来自 **Harness + Nexus**。Harness 是模型外面那层运行系统，Nexus 是模型、工具、技能和策略接在一起的地方。
 
-*注：这里写你的项目所面向的受众，本项目能给他们带来什么，对他们的基础能力要求有哪些*
+阅读正文不需要 Agent、大模型或机器学习背景，需要能读懂基础 Python：变量、函数、类，以及 JSON。环境配置集中在各章的「台阶」里，跳过也不影响主线。
 
-## 在线阅读
-https://datawhalechina.github.io/repo-template
+## 学完你将拥有
+
+读完已经发布的第 16 章，Harnex 会具备这些能力：
+
+- 一个能连续调用多个工具的 Agent 循环
+- 可注册的工具，以及按方法说明加载的技能包
+- 可回看的会话轨迹、上下文压缩和长期记忆
+- 检索、引用、长任务规划
+- 自动评测、成本统计和失败归因
+- 沙箱、审批、凭据脱敏
+- 多用户隔离、审计和限流
+- 命令行和本地 Web 控制台
+
+第 17–21 章写完后，它再长成可安装、可扩展、能交给陌生人使用的版本。开发者工具走安装包和插件；面向大众的产品可以走 Web / PWA 上架。两条路都建立在第 16 章的工程标准上。
+
+## 这套教程有什么不同
+
+- **全书只做一个项目。** 每章给 Harnex 加一项能力，毕业作品就是你自己的 git 记录。
+- **先手写，再看框架。** 主线使用 Python 和 OpenAI SDK。第 14 章再用已经写过的 Harnex，对照 LangGraph、Codex 和 DeepSeek Harness。
+- **动作和方法分开。** 工具负责查天气、改文件、跑命令；技能包负责团队规范、发版流程和报告结构。
+- **工程能力和功能一起长。** 评测、延迟、成本、沙箱、审批、多用户都在主线里，每章结束都有一个能运行的结果。
+- **难度跟着使用者走。** 自己试一次、自己天天用、敢放一个月、交给同事、交给陌生人，每一级新使用者都会逼出下一级能力。
+
+本书里的「企业级」指 L3 起的工程质量：数据隔离、操作可审计、出事追得到责。它和客户是公司还是个人无关。
+
+## 适合谁
+
+- 会基础 Python，想从零弄清 Agent 到底由哪些部分组成
+- 想看懂 Claude Code、Codex 一类产品的循环、工具、会话、权限和客户端
+- 想做出一个自己在用、也能部署给别人的 Agent
+
+有经验的读者可以先看各章末尾的验收标准，再读第 15–20 章的沙箱、审批、多用户和分发。
+
+## 学习路线
+
+
+| 级别         | 谁在用        | 你会补上的能力            | 章节        |
+| ---------- | ---------- | ------------------ | --------- |
+| L0 Demo 能跑 | 自己，先跑起来    | 概念、Prompt、第一个循环    | 第 1–3 章   |
+| L1 个人自用    | 自己，每天都用    | 工具、技能包、记忆、执行、检索、规划 | 第 4–9 章   |
+| L2 可靠可观测   | 自己，敢连续跑一个月 | 可靠性、控制台、成本、评测、框架对照 | 第 10–14 章 |
+| L3 多用户安全   | 同事和朋友      | 沙箱、审批、隔离、审计        | 第 15–16 章 |
+| L4 分发达标    | 陌生人        | 三个案例、安装包、插件、毕业设计   | 第 17–21 章 |
+
+
+默认按章号阅读。「台阶」是可选的环境配置，包括 FastAPI、Docker 和系统级沙箱。只想先得到一个自己敢用的 Harnex，读到第 14 章可以停。
 
 ## 目录
-*这里写你的项目目录，及其完成状态，已完成的部分添加上跳转链接*
 
-|  章节名   | 简介 | 状态 |
-|  ----  | ---- | ---- |
-| [第1章 xxx](https://github.com/datawhalechina/repo-template/blob/main/docs/chapter1)  | xxx | ✅ |
-| [第2章 xxx](https://github.com/datawhalechina/repo-template/blob/main/docs/chapter2)  | xxx | ✅ |
-| [第3章 xxx](https://github.com/datawhalechina/repo-template/blob/main/docs/chapter3)  | xxx | ✅ |
-| 第4章  | xxx | 🚧 |
+✅ 已成稿，含正文和配套代码。🚧 目前是节级大纲。
 
-## 贡献者名单
+### 阶段一 · L0：Demo 能跑
 
-| 姓名 | 职责 | 简介 |
-| :----| :---- | :---- |
-| 小明 | 项目负责人 | 一个理想主义者 |
-| 小红 | 第1章贡献者 | 小明的朋友 |
-| 小强 | 第2章贡献者 | 小明的朋友 |
 
-*注：表头可自定义，但必须在名单中标明项目负责人*
+| 章节                                                 | 这一章做什么                            | 状态    |
+| -------------------------------------------------- | --------------------------------- | ----- |
+| [第 1 章 什么是 Agent：从会回答到会办事](docs/ch01/index.md)     | 分清 Agent、Harness，以及什么时候不该用 Agent  | ✅ 4 节 |
+| [第 2 章 Prompt 与 LLM：你只需要知道这么多](docs/ch02/index.md) | 把话说清楚，并用 30 行代码看见模型只发出请求、不自己执行    | ✅ 3 节 |
+| [第 3 章 手写第一个 Agent 循环](docs/ch03/index.md)         | 约 75 行写出循环，Harnex 从这里诞生。**L0 达标** | ✅ 2 节 |
+
+
+
+
+### 阶段二 · L1：个人自用
+
+
+| 章节                                                    | 这一章做什么                              | 状态    |
+| ----------------------------------------------------- | ----------------------------------- | ----- |
+| [第 4 章 工具系统与 MCP](docs/ch04/index.md)                 | 把写死的函数做成可注册的工具，需要时再接到 MCP           | ✅ 4 节 |
+| [第 5 章 Agent Skills：把方法论装进 Agent](docs/ch05/index.md) | 用技能包装方法：规范、流程和报告结构按需加载              | ✅ 8 节 |
+| [第 6 章 上下文工程与会话日志](docs/ch06/index.md)                | 让它记得住，也能回看完整轨迹                      | ✅ 7 节 |
+| [第 7 章 shell 与代码执行](docs/ch07/index.md)               | 在指定目录跑命令，并处理超时、白名单和危险操作             | ✅ 6 节 |
+| [第 8 章 检索增强：让 Agent 会查资料](docs/ch08/index.md)         | 查你自己的资料，回答时带上来源                     | ✅ 6 节 |
+| [第 9 章 规划与长任务](docs/ch09/index.md)                    | 完成多步任务，并判断什么时候才需要多个 Agent。**L1 达标** | ✅ 5 节 |
+
+
+
+
+### 阶段三 · L2：可靠可观测
+
+
+| 章节                                            | 这一章做什么                         | 状态    |
+| --------------------------------------------- | ------------------------------ | ----- |
+| [第 10 章 可靠性：让 Agent 不再抽风](docs/ch10/index.md) | 校验输出、失败重试、从中断处恢复               | ✅ 6 节 |
+| [第 11 章 交互形态与全端雏形](docs/ch11/index.md)        | 流式输出、并行工具，以及危险操作先询问；做出 Web 控制台 | ✅ 6 节 |
+| [第 12 章 可观测性与成本](docs/ch12/index.md)          | 查清每次回答为什么这样来，以及慢在哪、贵在哪         | ✅ 6 节 |
+| [第 13 章 评测体系（Eval）](docs/ch13/index.md)       | 给会变化的系统写下可回归的测试。**L2 达标**      | ✅ 6 节 |
+| [第 14 章 框架地图](docs/ch14/index.md)             | 用你已经手写过的部件，对照常见框架和产品           | ✅ 5 节 |
+
+
+
+
+### 阶段四 · L3：安全可信
+
+
+| 章节                                   | 这一章做什么                       | 状态    |
+| ------------------------------------ | ---------------------------- | ----- |
+| [第 15 章 沙箱与审批策略](docs/ch15/index.md) | 限制它能碰什么，并挡住来自外部内容的指令         | ✅ 9 节 |
+| [第 16 章 团队化与多用户](docs/ch16/index.md) | 多人使用、数据隔离、配额、审计和部署。**L3 达标** | ✅ 8 节 |
+
+
+
+
+### 阶段五 · L4：分发达标
+
+
+| 章节                                                                   | 这一章做什么                     | 状态     |
+| -------------------------------------------------------------------- | -------------------------- | ------ |
+| [第 17 章 案例一：企业知识库问答 Agent](chapters/ch17-kb-qa-agent.md)             | 带权限、来源和拒答边界的知识库问答          | 🚧 7 节 |
+| [第 18 章 案例二：数据分析 Agent](chapters/ch18-data-analysis-agent.md)        | 在沙箱里分析数据，并生成可以核对的报告        | 🚧 7 节 |
+| [第 19 章 案例三：Computer Use 与 GUI Agent](chapters/ch19-computer-use.md) | 把看页面、点击和填表做成可插拔能力          | 🚧 6 节 |
+| [第 20 章 分发、插件生态与运营](chapters/ch20-distribution-ecosystem.md)         | 安装包、插件、反馈闭环和上架路径。**L4 达标** | 🚧 6 节 |
+| [第 21 章 毕业设计](chapters/ch21-capstone.md)                             | 开发者赛道或大众赛道，按 L4 标准验收       | 🚧 5 节 |
+
+
+每章末尾有术语、验收清单、常见误区和自测题。附录包括台阶合集、词汇表和错误模式手册。番外目录收踩坑记录、面试题和读者贡献的技能包，见 [extra/](extra/README.md)。
+
+## Harnex 长什么样
+
+```text
+多客户端：命令行（第 3 章）· Web 控制台（第 11 章）· 移动审批（第 20 章）· 无界面运行（第 13 章）
+        │
+Harnex 运行时
+  ├─ Agent 循环
+  ├─ 能力层：工具注册表 + 技能包加载器
+  ├─ 会话日志、上下文压缩、轨迹
+  └─ 权限策略 + 审批档位
+        │
+工具：本地函数、远程 API 或 MCP
+技能包：一份目录加一份 SKILL.md
+        │
+执行环境：本地白名单 → Docker 沙箱 → 系统级沙箱（台阶）
+```
+
+新增一项常规能力时，把工具或技能包挂上去，循环不用重写。需要不同的调度方式时，循环本身也可以替换。完整能力清单见 [extra/skills-map.md](extra/skills-map.md)。
+
+## 配套代码
+
+- [codes/](codes/README.md) 里有两部分：`codes/ch01`–`codes/ch16` 是正文代码块的逐字节提取，共 173 个文件；`codes/harnex/` 是组装起来的项目，当前到第 16 章。
+- 提取出的文件可编译，并在桩环境跑通。校验方式见 [codes/VERIFY.md](codes/VERIFY.md)。
+- 正文索引在 [docs/index.md](docs/index.md)，逐节目录在 [extra/toc-v6.md](extra/toc-v6.md)，未成稿章节的大纲在 [chapters/README.md](chapters/README.md)。
+
+在线站点尚未发布。现在直接从 [第 1 章](docs/ch01/index.md) 阅读。
 
 ## 参与贡献
 
-- 如果你发现了一些问题，可以提Issue进行反馈，如果提完没有人回复你可以联系[保姆团队](https://github.com/datawhalechina/DOPMC/blob/main/OP.md)的同学进行反馈跟进~
-- 如果你想参与贡献本项目，可以提Pull Request，如果提完没有人回复你可以联系[保姆团队](https://github.com/datawhalechina/DOPMC/blob/main/OP.md)的同学进行反馈跟进~
-- 如果你对 Datawhale 很感兴趣并想要发起一个新的项目，请按照[Datawhale开源项目指南](https://github.com/datawhalechina/DOPMC/blob/main/GUIDE.md)进行操作即可~
+- 发现问题时提 [Issue](https://github.com/itcharge/harness-notes/issues)。
+- 想参与修改时提 Pull Request。文字和代码的许可不同，见下方许可说明。
+- 如果 Issue 或 PR 没有人回复，可以联系 [Datawhale 保姆团队](https://github.com/datawhalechina/DOPMC/blob/main/OP.md)。
+- 想在 Datawhale 发起新项目，见 [Datawhale 开源项目指南](https://github.com/datawhalechina/DOPMC/blob/main/GUIDE.md)。
+
+
+
+## 贡献者名单
+
+
+| 姓名                                      | 职责         | 简介           |
+| --------------------------------------- | ---------- | ------------ |
+| [ITCharge](https://github.com/itcharge) | 项目负责人 / 作者 | 全书正文与配套代码的作者 |
+
+
+合并 PR 后，贡献者会补充到上表。
 
 ## 关注我们
 
-<div align=center>
-<p>扫描下方二维码关注公众号：Datawhale</p>
-<img src="https://raw.githubusercontent.com/datawhalechina/pumpkin-book/master/res/qrcode.jpeg" width = "180" height = "180">
-</div>
+扫描下方二维码关注公众号：Datawhale
 
-## LICENSE
+![](https://raw.githubusercontent.com/datawhalechina/pumpkin-book/master/res/qrcode.jpeg)
 
-<a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="知识共享许可协议" style="border-width:0" src="https://img.shields.io/badge/license-CC%20BY--NC--SA%204.0-lightgrey" /></a><br />本作品采用<a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">知识共享署名-非商业性使用-相同方式共享 4.0 国际许可协议</a>进行许可。
+## 许可
 
-*注：默认使用CC 4.0协议，也可根据自身项目情况选用其他协议*
+正文和代码分开授权：
+
+
+| 内容                                                | 许可                                 |
+| ------------------------------------------------- | ---------------------------------- |
+| `docs/`、`chapters/`、`extra/` 中的教程与说明，以及本 README   | [CC BY-NC-ND 4.0](LICENSE-CONTENT) |
+| `codes/`、`docs/.vitepress/`、`.github/` 中的程序、脚本和配置 | [MIT](LICENSE-CODE)                |
+
+
+可以分享教程原文，需要署名、非商业使用，并且不发布修改后的版本。程序代码可以按 MIT 使用、修改和再分发，保留版权声明。两类许可的范围和全文见 [LICENSE](LICENSE)。
