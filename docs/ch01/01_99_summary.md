@@ -21,27 +21,38 @@
 
 ## 动手实践：看一次「它只会接话」
 
-下面三次实验是体验，不是本章的项目交付物。项目交付物是 1.4 节的定位书 v0.1。
+下面三次实验是体验，不是本章的项目交付物。本章真正要交的，是 1.4.3 节那份五句话的定位书 v0.1。
 
-要跑通调用，需要三样东西：Python、`openai` 包、一个 API Key。浏览器里的 Notebook（例如 Colab）可以免去本机安装，但仍然要在那个环境里配好 Key。附录 A 的「台阶」会写配置。没有 Key 时，先完成定位书和选型练习，第 2 章再补这次调用。
+要跑通调用，需要三样东西：Python、`openai` 包、一个 API Key。DeepSeek 和通义千问都兼容这套 SDK，差别只在三处：Key 放进哪个环境变量、`base_url` 指向哪家、`model` 写成哪个名字。没有 Key 时，先完成定位书和选型练习，第 2 章再补这次调用。
 
 > 这里只对话、不调工具，是为了让你看见：它能接出下一段内容，但不能自己去办事。这个体感是第 3 章的起点。
 
 **实验一：看清它到底返回了什么**
 
-下面的模型名是示例。账号里没有这一个，就换成你能调用的小模型，观察的对象不变。
+下面以 DeepSeek 为例。这一次只看整段回复。账号里的模型名不同，就换成你能调用的那个，观察的对象不变。
 
 ```python
+import os
 from openai import OpenAI
 
-client = OpenAI()   # 需要一个 API Key，见附录 A 的「台阶」
-
-resp = client.chat.completions.create(
-    model="gpt-4o-mini",
-    messages=[{"role": "user", "content": "杭州有什么值得去的？"}],
+client = OpenAI(
+    api_key=os.environ["DEEPSEEK_API_KEY"],
+    base_url="https://api.deepseek.com",
 )
 
+resp = client.chat.completions.create(
+    model="deepseek-flash",
+    messages=[{"role": "user", "content": "杭州有什么值得去的？"}],
+)
 print(resp.choices[0].message)
+```
+
+换成通义千问时，只改这三处。`{WorkspaceId}` 换成你的工作空间 ID：
+
+```text
+api_key=os.environ["DASHSCOPE_API_KEY"]
+base_url="https://{WorkspaceId}.cn-beijing.maas.aliyuncs.com/compatible-mode/v1"
+model="qwen3.8-max"
 ```
 
 请仔细看输出：它返回的是一段内容，外加一个 `role` 字段。消息体里还有 `content`。
@@ -83,7 +94,7 @@ print(resp.choices[0].message)
 
 ## 动手任务
 
-1. **写定位书 v0.1**：用 1.4 的模板给 Harnex 填五句话（第 4 条「不做什么」至少写三条）
+1. **写一份定位书 v0.1**：用 1.4 的模板写一份 Harnex 的「框架定位书」。用五句话说清 Harnex 是给谁用的、做什么、不做什么。后面每加一个功能，都回来对照它
 2. **做选型判断**：找三个你手上真实的需求，用 1.3 的四句顺序各走一遍，写出停在哪一句
 3. **可选：跑通对话**：完成上面三个实验，保存输出；没有 API Key 就留到第 2 章
 
@@ -93,7 +104,7 @@ print(resp.choices[0].message)
 - [ ] 能对 3 个真实需求按 1.3 的顺序判断「普通程序 / Workflow / Agent / 先不自动化」，并说出停在哪一句
 - [ ] 能说出 Harness 五部件，并说明它和第 3 章「循环内部五部件」不是同一张清单
 - [ ] 在配好 Key 的环境里跑通第一次对话，并能指出返回结果里的 `role` / `content`；暂时没有 Key 则已记下实验一要观察什么
-- [ ] 写出 Harnex 的定位书 v0.1（≤5 句，且写明「不做什么」）
+- [ ] 写出 Harnex 的定位书 v0.1：五句话以内，写清给谁用、做什么，并列出至少三条「不做什么」
 
 ## 本章的常见误区
 
