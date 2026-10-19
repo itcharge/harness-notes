@@ -9,6 +9,7 @@ export default defineConfig({
   title: 'Harness 笔记',
   description: '从零开始手写一个能上线的 Agent',
   base,
+  ignoreDeadLinks: true,
   markdown: {
     math: true
   },

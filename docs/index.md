@@ -1,50 +1,25 @@
 ---
-# https://vitepress.dev/reference/default-theme-home-page
 layout: home
 
 hero:
-  name: "Datawhale开源教程"
-  text: "AI前沿知识开源教程"
-  tagline: 开始学起来吧~
-  image:
-    src: /learning.GIF
-    alt: Datawhale开源教程
+  name: Harness 笔记
+  text: 从零开始手写一个能上线的 Agent
+  tagline: 贯穿项目 Harnex：从大约 75 行写起，补到能部署、能扩展、能交给别人用。
   actions:
     - theme: brand
-      text: 开始学习
-      link: /chapter1/
+      text: 开始阅读
+      link: /ch01/
+    - theme: alt
+      text: GitHub
+      link: https://github.com/itcharge/harness-notes
 
 features:
-  - title: 💥 前沿
-    details: 紧跟技术发展输出最前沿的知识
-  - title: 🎁 免费
-    details: 无任何形式的收费
-  - title: 🌐 开源
-    details: 教程和代码源文件全部托管在GitHub
+  - title: 第 1 章
+    details: 什么是 Agent：从会回答到会办事
+    link: /ch01/
+  - title: 第 2 章
+    details: Prompt 与 LLM：你只需要知道这么多
+    link: /ch02/
+  - title: 后续章节
+    details: 第 3–16 章正文已写好，会陆续推到站点。第 17–21 章仍是大纲。
 ---
-<script setup>
-import { VPTeamMembers } from 'vitepress/theme'
-
-const members = [
-  {
-    avatar: 'https://www.github.com/Sm1les.png',
-    name: 'Sm1les',
-    title: '项目负责人',
-    links: [
-      { icon: 'github', link: 'https://github.com/Sm1les' },
-    ]
-  },
-  {
-    avatar: 'https://www.github.com/Sm1les.png',
-    name: '马里奥',
-    title: '核心贡献者',
-    links: [
-      { icon: 'github', link: 'https://github.com/Sm1les' },
-    ]
-  }
-]
-</script>
-
-
-<h2 align="center">Team</h2>
-<VPTeamMembers size="small" :members />
