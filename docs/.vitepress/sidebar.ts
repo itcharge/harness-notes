@@ -24,4 +24,14 @@ export const sidebar: DefaultTheme.Sidebar = [
       { text: '本章小结与验收', link: '/ch02/02_99_summary' },
     ],
   },
+  {
+    text: '第 3 章 手写第一个 Agent 循环',
+    link: '/ch03/',
+    collapsed: false,
+    items: [
+      { text: '3.1 ReAct 与循环的解剖：五个抽屉', link: '/ch03/03_01_react_loop_anatomy' },
+      { text: '3.2 七十行代码，一个完整的 Agent：从内核到 CLI', link: '/ch03/03_02_seventy_lines_agent' },
+      { text: '本章小结与验收', link: '/ch03/03_99_summary' },
+    ],
+  },
 ]

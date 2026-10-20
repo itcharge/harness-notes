@@ -20,6 +20,9 @@ features:
   - title: 第 2 章
     details: Prompt 与 LLM：你只需要知道这么多
     link: /ch02/
+  - title: 第 3 章
+    details: 手写第一个 Agent 循环
+    link: /ch03/
   - title: 后续章节
-    details: 第 3–16 章正文已写好，会陆续推到站点。第 17–21 章仍是大纲。
+    details: 第 4–16 章正文已写好，会陆续推到站点。第 17–21 章仍是大纲。
 ---
