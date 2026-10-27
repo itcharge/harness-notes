@@ -3,3 +3,12 @@ docs/.vitepress/dist
 docs/.vitepress/cache
 .DS_Store
 .workbuddy
+.codes-backup-*/
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
