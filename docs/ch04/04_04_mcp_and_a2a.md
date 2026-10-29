@@ -33,44 +33,53 @@ MCP（Model Context Protocol）把上面那件事标准化了。你只需要知�
 
 ## 4.4.3 最小的服务端
 
-用官方 Python SDK 把一个工具挂上 MCP，只需要几行：
+先装 SDK：`pip install mcp==2.3.0`。（mcp==2.3.0 是本章验证过的版本）。用官方 Python SDK 把一个工具挂上 MCP，要写的就这些：
 
 ```python
 # harnex/tools/mcp/fs_server.py —— 把文件工具搬进独立进程
-from mcp.server.fastmcp import FastMCP
+from mcp.server.mcpserver import MCPServer
 
 from tools_fs import apply_patch as patch_impl, fs_read as read_impl, fs_write as write_impl
 
-server = FastMCP("harnex-fs")
+server = MCPServer("harnex-fs")
+
+
+def _safe(fn, args: dict) -> str:
+    """工具里抛的异常，SDK 只回一句「Error executing tool」，原因会丢——自己兜住。"""
+    try:
+        return fn(args)
+    except Exception as exc:
+        return f"错误：{type(exc).__name__}: {exc}"
 
 
 @server.tool()
 def fs_read(path: str = ".") -> str:
     """读取工作目录里的文件内容，或列出目录下有哪些文件。"""
-    return read_impl({"path": path})
+    return _safe(read_impl, {"path": path})
 
 
 @server.tool()
 def fs_write(path: str, content: str) -> str:
     """新建一个文件。目标文件已存在时会失败，请改用 apply_patch。"""
-    return write_impl({"path": path, "content": content})
+    return _safe(write_impl, {"path": path, "content": content})
 
 
 @server.tool()
 def apply_patch(path: str, old: str, new: str) -> str:
     """在文件里精确替换一段文本，old 必须唯一。"""
-    return patch_impl({"path": path, "old": old, "new": new})
+    return _safe(patch_impl, {"path": path, "old": old, "new": new})
 
 
 if __name__ == "__main__":
     server.run()          # 默认走 stdio：由 harness 作为子进程拉起
 ```
 
-三个细节值得留意：
+四个细节值得留意：
 
 - **工具名和本地保持一致。** 函数叫 `fs_read` / `apply_patch`，不叫 `fs_read_tool`——搬走之后，模型看到的名字不该变。
 - **函数签名变成了「具名参数」而不是 `args` 字典。** MCP server 这一侧的参数是**它自己的接口**，由 SDK 生成 JSON Schema 交给客户端；你的工具实现内部收 `args` 字典，只是这个进程里的私事。
 - **它的 docstring 就是 description。** SDK 直接读 docstring 当描述——**4.2 节的描述工程，在这里是唯一的信息来源**，写含糊了，harness 那侧收到的就是一条含糊的描述。
+- **异常要自己兜住，`_safe()` 就是干这个的。** 工具里抛出去的异常，SDK 只会回一句 `Error executing tool fs_read`——你精心写的「路径越界，请改用相对路径」全被吞了。这是 4.2 节那条规矩的跨进程版：**错误必须是字符串，而且得是能读懂的那种**。在 harness 进程里有 `registry.call()` 兜底，跨了进程就没人替你兜。
 
 ## 4.4.4 远程工具进同一个注册表
 
@@ -113,7 +122,7 @@ class McpServer:
             registry.register(Tool(
                 name=info.name,
                 description=info.description,
-                parameters=info.inputSchema,       # MCP 给的 JSON Schema，直接可用
+                parameters=info.input_schema,      # MCP 给的 JSON Schema，直接可用
                 handler=self._proxy(info.name),    # 执行那一栏换成「转发给它」
                 scopes=self.scopes,                # 权限仍由本地决定，见下
             ))
@@ -124,13 +133,30 @@ class McpServer:
             result = await self._session.call_tool(name, args)
             return "\n".join(part.text for part in result.content if part.type == "text")
         return call
+
+    async def aclose(self) -> None:
+        """关掉会话和子进程。由调用方在退出前调一次——不关就是留一个孤儿进程。"""
+        await self._stack.aclose()
 ```
 
 **`_proxy` 这一层看着多余，其实少不掉。** 注册表调 handler 时只递一个 `args` 字典，它不知道这次要调哪个工具；而 MCP 的调用要两个参数：工具名 + 参数。所以每注册一个远程工具，就单独造一个函数，把名字存在函数里。
 
 **`scopes` 是从本地传进去的，不是 server 说了算。** 服务端清单里就算写着「我需要 fs:write」，也不代表它就能拿到——这里用的是你 `McpServer(...)` 时传的那一份。**权限的判断永远留在 harness 这一侧**，这是 4.1 节「默认拒绝」的延伸：工具在哪跑不重要，能不能动手由本地定。
 
-装配线于是变成这样（`build_registry()` 得先加个 `exclude` 参数，被点名的工具不装）：
+回到装配线。文件工具既然已经由 `attach()` 装进来，本地那份就不能再装一遍——否则会撞上 4.1 的「重名拒」。所以 `build_registry()` 多一个 `exclude`：点名的工具不装。
+
+```python
+def build_registry(exclude: set | None = None) -> ToolRegistry:
+    skip = set(exclude or ())
+    registry = ToolRegistry(granted_scopes={"fs:read", "fs:write", "time:read"})
+
+    def add(tool: Tool) -> None:          # 唯一的差别：装之前先看它在不在 skip 里
+        if tool.name not in skip:
+            registry.register(tool)
+    ...
+```
+
+装配线于是变成这样：
 
 ```python
 async def main():
@@ -138,7 +164,10 @@ async def main():
     registry = build_registry(exclude={"fs_read", "fs_write", "apply_patch"})
     fs = McpServer("python", ["-m", "tools.mcp.fs_server"], scopes=["fs:read", "fs:write"])
     await fs.attach(registry)                                     # 文件工具从独立进程接进来
-    print(await run("帮我看看 harness 目录里有哪些文件", registry))
+    try:
+        print(await run("帮我看看 harness 目录里有哪些文件", registry))
+    finally:
+        await fs.aclose()                                         # 关会话、收子进程
 ```
 
 `["-m", "tools.mcp.fs_server"]` 是子进程的启动命令，等于在项目根目录执行 `python -m tools.mcp.fs_server`。
@@ -146,6 +175,8 @@ async def main():
 **必须带 `-m`。** `fs_server.py` 开头要 `from tools_fs import ...`，而这个文件在 `tools/mcp/` 下面。直接 `python tools/mcp/fs_server.py` 启动时，Python 只把 `tools/mcp/` 放进搜索路径，找不到根目录的 `tools_fs.py`。换成 `-m`，当前目录本身就在搜索路径上，两个都能找到（和第 3 章 3.2 节是同一个道理）。
 
 **「搬」是搬走，不是复制**——本地和远程各留一份，模型菜单里就冒出两个功能重叠的工具：同一件活有两个入口，它容易挑错那个。
+
+**那个 `finally` 不能省。** `AsyncExitStack` 只是把「要关的东西」记在账上，不会自己结账：不调 `aclose()`，子进程就一直挂着，退出时还会报一句看不懂的 `cancel scope` 错误。`aclose()` 的实现只有一行——`await self._stack.aclose()`，按记下的相反顺序把会话、管道、进程逐层关掉。
 
 ## 4.4.5 拆出去之后循环怎么接
 
@@ -166,7 +197,7 @@ class ToolRegistry:
             result = tool.handler(args)
             if inspect.isawaitable(result):        # 问一句「要 await 吗」：MCP 工具要，本地工具不要
                 result = await result
-        except Exception as exc:
+        except Exception as exc:                   # 兜底：绝不让异常抛穿循环
             return f"错误：{tool.name} 执行失败（{type(exc).__name__}: {exc}）"
         return result if isinstance(result, str) else str(result)
 ```

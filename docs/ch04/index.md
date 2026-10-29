@@ -2,13 +2,13 @@
 
 > 难度：`入门` ｜ 达标线：L1 起步 ｜ 含可运行代码（工具层 3 个模块 109 行 + 装配与主循环 80 行）
 
-本章代码在 [`codes/ch04/harnex_v0.2/`](../../codes/ch04/harnex_v0.2/)。这个目录可以单独运行。
+本章代码在 [`codes/ch04/harnex_v0.2/`](../../codes/ch04/harnex_v0.2/)。这个目录可以单独运行，先装依赖：`pip install openai mcp==2.3.0`（`mcp==2.3.0` 是本章验证过的版本）。
 
 ---
 
 ## 从上一章那个 TOOLS 字典说起
 
-第 3 章结尾，`harnex.py` 里有这么两行：
+第 3 章结尾，`loop/agent.py` 里有这么两行：
 
 ```python
 TOOLS = {

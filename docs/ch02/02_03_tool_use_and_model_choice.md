@@ -71,7 +71,7 @@ def chat(user_input: str) -> str:
 print(chat("杭州今天天气怎么样？"))
 ```
 
-`get_weather` 收到的是一个字典，例如 `{"city": "杭州"}`，也就是模型返回的 `arguments` 解析之后的结果。第 4 章的工具注册表、MCP 的 `inputSchema`，用的是同一个约定。
+`get_weather` 收到的是一个字典，例如 `{"city": "杭州"}`，也就是模型返回的 `arguments` 解析之后的结果。第 4 章的工具注册表、MCP 工具清单里的参数 schema，用的是同一个约定。
 
 对着代码看三件事：
 
