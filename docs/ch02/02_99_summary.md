@@ -50,7 +50,7 @@
 | ----- | ------------------ | ---------------------------- |  
 | 提示词   | Prompt             | 你发给模型的全部文字                   |  
 | 系统提示  | System Prompt      | 长期规则：角色、底线、风格                |  
-| 角色    | Role               | `system` / `user` / `assistant` / `tool` 四种消息身份 |  
+| 消息角色  | Message Role       | 消息的四类身份：`system` / `user` / `assistant` / `tool`；与 2.2 五零件里的「角色（人设）」不是一回事 |  
 | 示例学习  | Few-shot           | 给几个「输入 → 输出」的例子当模板           |  
 | 思维链   | Chain of Thought   | 让它先写判断依据再给结论                 |  
 | 温度    | Temperature        | 输出随机性旋钮；工具调用用 0              |  

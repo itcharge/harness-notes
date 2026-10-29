@@ -82,7 +82,7 @@ if __name__ == "__main__":
 
 这份脚本一共 75 行。其中真正构成「循环」的，只有 `run()` 里那十来行。其余代码是两个工具，以及一份告诉模型「可以调用什么」的清单。
 
-这十来行里，让循环转起来的是标着 ①②③④ 的那五行（`for`、`chat`、`append`、`if not msg.tool_calls`、`return`）。上面这整份脚本就是 **Harnex v0.1**，落在 [`codes/ch03/harnex_v0.1/loop/agent.py`](../../codes/ch03/harnex_v0.1/loop/agent.py)。`chat()` 在同目录的 [`llm/client.py`](../../codes/ch03/harnex_v0.1/llm/client.py)。从第 4 章起，每一章的 `codes/chNN/harnex_v0.x/` 都是到该章为止能单独跑的一份，版本号每章加 0.1，到第 12 章为 `harnex_v1.0`。文件直接放在该目录下，不套 `src/harnex`。
+这十来行里，让循环转起来的是标着 ①②③④ 的那几行：④ `for` 起圈、① `chat` 出决定、② `append` 记历史、③ `if not msg.tool_calls` 判停、`return` 交答案。上面这整份脚本就是 **Harnex v0.1**，落在 [`codes/ch03/harnex_v0.1/loop/agent.py`](../../codes/ch03/harnex_v0.1/loop/agent.py)。`chat()` 在同目录的 [`llm/client.py`](../../codes/ch03/harnex_v0.1/llm/client.py)。从第 4 章起，每一章的 `codes/chNN/harnex_v0.x/` 都是到该章为止能单独跑的一份，版本号每章加 0.1，到第 12 章为 `harnex_v1.0`。文件直接放在该目录下，不套 `src/harnex`。
 
 `chat()` 来自第 2 章的 `llm.py`。本章不直接写模型厂商的调用代码：
 
@@ -136,7 +136,7 @@ python -m loop.agent
 
 1. **模型被调用了两次。** 第一次只返回「请调用 `get_weather`」。第二次看到「上海：晴，26℃」，才写出给人看的回答。第二次要等第一次结束。
 2. **真正执行工具的是你的代码。** 按名字从 `TOOLS` 取出函数，读出参数，再调用。模型返回的是名字和参数。
-3. **`messages` 每圈都在变长。** 每转一圈，会将模型的回复和工具结果都追加到消息中。它能根据晴天作答，是因为结果写回了 `messages` 列表。这就是就是第 6 章「会话日志」的最初形态。
+3. **`messages` 每圈都在变长。** 每转一圈，会将模型的回复和工具结果都追加到消息中。它能根据晴天作答，是因为结果写回了 `messages` 列表。这就是第 6 章「会话日志」的最初形态。
 
 ## 3.2.2 每一段在产品里叫什么
 
