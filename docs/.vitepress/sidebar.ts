@@ -34,4 +34,16 @@ export const sidebar: DefaultTheme.Sidebar = [
       { text: '本章小结与验收', link: '/ch03/03_99_summary' },
     ],
   },
+  {
+    text: '第 4 章 工具系统与 MCP',
+    link: '/ch04/',
+    collapsed: false,
+    items: [
+      { text: '4.1 从函数列表到工具注册表：粒度与依赖倒置', link: '/ch04/04_01_tool_registry' },
+      { text: '4.2 工具描述工程与错误返回设计', link: '/ch04/04_02_tool_description_and_errors' },
+      { text: '4.3 第一批正式工具：读、写、改', link: '/ch04/04_03_first_real_tools' },
+      { text: '4.4 MCP 与 A2A：把工具搬进独立进程', link: '/ch04/04_04_mcp_and_a2a' },
+      { text: '本章小结与验收', link: '/ch04/04_99_summary' },
+    ],
+  },
 ]
