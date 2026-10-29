@@ -37,7 +37,7 @@
 
 > 这是全书唯一一次系统讲 prompt 与模型机制。后面每一章都在用这里的结论，但不再重复解释。
 
-**前置**：第 1 章的认知（Agent 三要素、Harness 五部件）；会读写 Python dict；有一个可用的 API Key（没有？见附录 A 的「台阶」）。
+**前置**：第 1 章的认知（Agent 三要素、Harness 五部件）；会读写 Python dict；有一个可用的 API Key。
 
 ---
 

@@ -1,4 +1,4 @@
-# harnex/loop/agent.py —— Harnex v0.3：七十行，一个完整的 Agent
+# harnex/loop/agent.py —— Harnex v0.1：七十行，一个完整的 Agent
 import json
 from datetime import datetime
 from llm import chat          # 第 2 章的适配层：唯一接触模型 SDK 的地方

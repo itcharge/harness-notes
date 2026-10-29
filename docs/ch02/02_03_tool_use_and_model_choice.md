@@ -131,7 +131,7 @@ Agent 会花钱，也会花时间让人等。
 不同供应商的接口大同小异，你的代码不该被任何一家的细节绑死。做法很简单：写一个薄薄的 `llm.py`，把调用包起来。
 
 ```python
-# llm.py —— 全书唯一直接接触模型 SDK 的地方
+# harnex/llm/client.py —— 全书唯一直接接触模型 SDK 的地方
 import os
 from openai import OpenAI
 

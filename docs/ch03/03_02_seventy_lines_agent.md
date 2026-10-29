@@ -3,7 +3,7 @@
 上一节问了五个问题，并说这一节会按「想、记、停、熔断、做、看」走完一圈。下面这份脚本就是那一圈。先通读一遍，再拿「上海现在天气怎么样」走一遍。
 
 ```python
-# harnex.py —— Harnex v0.3：七十行，一个完整的 Agent
+# harnex/loop/agent.py —— Harnex v0.1：七十行，一个完整的 Agent
 import json
 from datetime import datetime
 from llm import chat          # 第 2 章的适配层：唯一接触模型 SDK 的地方
@@ -82,17 +82,36 @@ if __name__ == "__main__":
 
 这份脚本一共 75 行。其中真正构成「循环」的，只有 `run()` 里那十来行。其余代码是两个工具，以及一份告诉模型「可以调用什么」的清单。
 
+这十来行里，让循环转起来的是标着 ①②③④ 的那五行（`for`、`chat`、`append`、`if not msg.tool_calls`、`return`）。上面这整份脚本就是 **Harnex v0.1**，落在 [`codes/ch03/harnex_v0.1/loop/agent.py`](../../codes/ch03/harnex_v0.1/loop/agent.py)。`chat()` 在同目录的 [`llm/client.py`](../../codes/ch03/harnex_v0.1/llm/client.py)。从第 4 章起，每一章的 `codes/chNN/harnex_v0.x/` 都是到该章为止能单独跑的一份，版本号每章加 0.1，到第 12 章为 `harnex_v1.0`。文件直接放在该目录下，不套 `src/harnex`。
+
 `chat()` 来自第 2 章的 `llm.py`。本章不直接写模型厂商的调用代码：
 
 ```python
-# llm.py —— 唯一直接接触模型 SDK 的地方（第 2 章产物，本章直接复用）
+# harnex/llm/client.py —— 唯一直接接触模型 SDK 的地方（第 2 章产物，本章直接复用）
 def chat(messages, tools=None, temperature=0.0):
+    kwargs = {"temperature": temperature}
+    if tools:
+        kwargs["tools"] = tools
     resp = _client.chat.completions.create(
-        model="gpt-4o-mini", messages=messages, tools=tools, temperature=temperature)
+        model=_model,
+        messages=messages,
+        **kwargs,
+    )
     return resp.choices[0].message
 ```
 
-换模型或换供应商，只改这一个文件。
+上面这几行和 [`codes/ch03/harnex_v0.1/llm/client.py`](../../codes/ch03/harnex_v0.1/llm/client.py) 里那一份逐字相同。文件开头还定死了三个值：`api_key` 从环境变量取，`base_url="https://api.deepseek.com"`，`_model = "deepseek-flash"`。换模型或换供应商，只改这三个值。
+
+`if tools:` 这一行是 2.3.4 留下的规矩：本轮没有工具时，不要把 `tools=None` 传进去。所以这里的 `kwargs` 是现攒的，不是把 `tools=tools` 写死在调用里。
+
+**怎么跑起来。** 先 `cd` 进这份代码的目录，再用 `-m` 从目录本身启动：
+
+```bash
+cd codes/ch03/harnex_v0.1
+python -m loop.agent
+```
+
+不要写成 `python loop/agent.py`。那样启动，Python 只把脚本所在的 `loop/` 放进模块搜索路径，开头那句 `from llm import chat` 会报 `ModuleNotFoundError: No module named 'llm'`。用 `-m` 启动时，当前目录本身就在搜索路径上，`llm` 和 `loop` 都能找到，也不用设 `PYTHONPATH`。装好 `openai`、Key 放进环境变量以后，看到 `你> ` 就是在等输入了。
 
 ## 3.2.1 走一遍：查上海天气
 

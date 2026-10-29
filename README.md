@@ -149,7 +149,7 @@ Harnex 运行时
 
 ## 配套代码
 
-- [codes/](codes/README.md) 里有两部分：`codes/ch01`–`codes/ch16` 是正文代码块的逐字节提取，共 173 个文件；`codes/harnex/` 是组装起来的项目，当前到第 16 章。
+- [codes/](codes/README.md) 里有两部分：`codes/ch01`–`codes/ch03` 与 `codes/ch13`–`codes/ch16` 是正文代码块的逐字节提取；第 4–12 章的代码在各章的 `harnex_v0.x/` 里，正文直接引用。`codes/harnex/` 是组装起来的项目，当前到第 16 章（v1.6.1：无特权核心加插件，结构见 [ARCHITECTURE.md](codes/harnex/ARCHITECTURE.md)）；`codes/harnex-langgraph/` 是第 14 章那个用状态图重写的对照项目，以外部插件的方式装进 Harnex。
 - 提取出的文件可编译，并在桩环境跑通。校验方式见 [codes/VERIFY.md](codes/VERIFY.md)。
 - 正文索引在 [docs/index.md](docs/index.md)，逐节目录在 [extra/toc-v6.md](extra/toc-v6.md)，未成稿章节的大纲在 [chapters/README.md](chapters/README.md)。
 

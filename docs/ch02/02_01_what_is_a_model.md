@@ -4,7 +4,7 @@
 
 这两个说法差在哪，2.2 节再拆。我们先来看清：你每次发话，接话的到底是个什么东西。了解清楚之后，很多困惑会自动消失。
 
-下面就是第 1 章实验一的那几行，问的是前一种说法。DeepSeek 和通义千问都兼容 OpenAI 的 SDK，换供应商只改三处：Key 的环境变量、`base_url`、`model`。
+下面就是第 1 章实验一的那几行，文件在 [`codes/ch01/01_99_01_first_call.py`](../../codes/ch01/01_99_01_first_call.py)。问的是前一种说法。DeepSeek 和通义千问都兼容 OpenAI 的 SDK，换供应商只改三处：Key 的环境变量、`base_url`、`model`。
 
 ```python
 import os
@@ -14,6 +14,7 @@ client = OpenAI(
     api_key=os.environ["DEEPSEEK_API_KEY"],
     base_url="https://api.deepseek.com",
 )
+
 resp = client.chat.completions.create(
     model="deepseek-flash",
     messages=[{"role": "user", "content": "杭州有什么值得去的？"}],
