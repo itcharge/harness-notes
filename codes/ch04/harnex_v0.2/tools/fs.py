@@ -11,6 +11,7 @@ def _resolve(rel: str) -> Path:
         raise ValueError(f"路径越界：'{rel}' 不在工作目录内")
     return target
 
+
 def _dir_first(path: Path) -> tuple:
     """排序键：目录排在文件前面，同类按名字排。"""
     return (path.is_file(), path.name)

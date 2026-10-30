@@ -55,7 +55,7 @@ async def main():
     try:
         print(await run("帮我看看 harness 目录里有哪些文件", registry))
     finally:
-        await fs.aclose()
+        await fs.aclose()                                         # 关会话、收子进程
 
 
 if __name__ == "__main__":
