@@ -46,4 +46,20 @@ export const sidebar: DefaultTheme.Sidebar = [
       { text: '本章小结与验收', link: '/ch04/04_99_summary' },
     ],
   },
+  {
+    text: '第 5 章 Agent Skills：把方法论装进 Agent',
+    link: '/ch05/',
+    collapsed: false,
+    items: [
+      { text: '5.1 两层能力模型：工具管动作，技能包装方法', link: '/ch05/05_01_two_layer_capability_model' },
+      { text: '5.2 SKILL.md：十分钟掌握格式', link: '/ch05/05_02_skill_md_format' },
+      { text: '5.3 渐进式披露：为什么装 50 个技能包也不怕', link: '/ch05/05_03_progressive_disclosure' },
+      { text: '5.4 给 Harnex 装上技能包加载器', link: '/ch05/05_04_skill_loader' },
+      { text: '5.5 技能包里的脚本：确定性部分不该即兴发挥', link: '/ch05/05_05_scripts_in_skills' },
+      { text: '5.6 决策表：能力该放进哪一层', link: '/ch05/05_06_layer_decision_table' },
+      { text: '5.7 技能包的质量与评测', link: '/ch05/05_07_skill_quality_and_eval' },
+      { text: '5.8 生态与安全：技能包带知识，不带权力', link: '/ch05/05_08_skill_security' },
+      { text: '本章小结与验收', link: '/ch05/05_99_summary' },
+    ],
+  },
 ]

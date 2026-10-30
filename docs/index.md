@@ -23,6 +23,12 @@ features:
   - title: 第 3 章
     details: 手写第一个 Agent 循环
     link: /ch03/
+  - title: 第 4 章
+    details: 工具系统与 MCP
+    link: /ch04/
+  - title: 第 5 章
+    details: Agent Skills：把方法论装进 Agent
+    link: /ch05/
   - title: 后续章节
-    details: 第 4–16 章正文已写好，会陆续推到站点。第 17–21 章仍是大纲。
+    details: 第 6–16 章正文已写好，会陆续推到站点。第 17–21 章仍是大纲。
 ---
