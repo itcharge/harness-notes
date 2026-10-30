@@ -12,7 +12,7 @@ from typing import Callable
 
 @dataclass
 class Tool:
-    """一个工具 = 名字 + 说明 + 参数 schema + 执行函数 + 权限声明"""
+    """一个工具 = 名字 + 说明 + 参数 schema + 执行函数 + 权限声明。"""
     name: str
     description: str
     parameters: dict
@@ -20,7 +20,7 @@ class Tool:
     scopes: list = field(default_factory=list)     # 权限声明：空 = 什么都没申请
 
     def schema(self) -> dict:
-        """转成给模型看的那一项（第 3 章 TOOL_SCHEMAS 里的一项）"""
+        """转成给模型看的那一项（第 3 章 TOOL_SCHEMAS 里的一项）。"""
         return {
             "type": "function",
             "function": {
