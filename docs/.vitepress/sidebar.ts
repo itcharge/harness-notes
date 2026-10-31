@@ -62,4 +62,19 @@ export const sidebar: DefaultTheme.Sidebar = [
       { text: '本章小结与验收', link: '/ch05/05_99_summary' },
     ],
   },
+  {
+    text: '第 6 章 上下文工程与会话日志',
+    link: '/ch06/',
+    collapsed: false,
+    items: [
+      { text: '6.1 从对话历史到轨迹：会话日志是追加式事件流', link: '/ch06/06_01_session_log' },
+      { text: '6.2 上下文预算的分配：谁在吃你的 token', link: '/ch06/06_02_context_budget' },
+      { text: '6.3 压缩（一）：什么时候该忘', link: '/ch06/06_03_compaction_part1' },
+      { text: '6.4 压缩（二）：三类策略与不可逆性', link: '/ch06/06_04_compaction_part2' },
+      { text: '6.5 长期记忆：跨会话记住「你」', link: '/ch06/06_05_long_term_memory' },
+      { text: '6.6 检索式记忆 vs 注入式记忆', link: '/ch06/06_06_memory_retrieval_vs_injection' },
+      { text: '6.7 回看：会话的可观测雏形', link: '/ch06/06_07_session_observability' },
+      { text: '本章小结与验收', link: '/ch06/06_99_summary' },
+    ],
+  },
 ]

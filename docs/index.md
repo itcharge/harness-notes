@@ -29,6 +29,9 @@ features:
   - title: 第 5 章
     details: Agent Skills：把方法论装进 Agent
     link: /ch05/
+  - title: 第 6 章
+    details: 上下文工程与会话日志
+    link: /ch06/
   - title: 后续章节
-    details: 第 6–16 章正文已写好，会陆续推到站点。第 17–21 章仍是大纲。
+    details: 第 7–16 章正文已写好，会陆续推到站点。第 17–21 章仍是大纲。
 ---
