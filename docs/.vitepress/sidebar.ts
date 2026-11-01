@@ -77,4 +77,18 @@ export const sidebar: DefaultTheme.Sidebar = [
       { text: '本章小结与验收', link: '/ch06/06_99_summary' },
     ],
   },
+  {
+    text: '第 7 章 shell 与代码执行',
+    link: '/ch07/',
+    collapsed: false,
+    items: [
+      { text: '7.1 子进程执行的最小实现：返回码比自然语言可靠', link: '/ch07/07_01_subprocess_basics' },
+      { text: '7.2 流式输出捕获与大输出处理', link: '/ch07/07_02_streaming_and_large_output' },
+      { text: '7.3 能执行什么：命令白名单与工作目录锁定', link: '/ch07/07_03_command_whitelist_and_workdir' },
+      { text: '7.4 为什么黑名单永远不完备：必须靠沙箱兜底', link: '/ch07/07_04_blacklist_vs_sandbox' },
+      { text: '7.5 动作后验证：退出码 0 ≠ 任务成功', link: '/ch07/07_05_post_action_verification' },
+      { text: '7.6 交互式与长驻进程（点到为止）', link: '/ch07/07_06_interactive_processes' },
+      { text: '本章小结与验收', link: '/ch07/07_99_summary' },
+    ],
+  },
 ]

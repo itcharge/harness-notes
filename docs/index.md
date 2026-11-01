@@ -32,6 +32,9 @@ features:
   - title: 第 6 章
     details: 上下文工程与会话日志
     link: /ch06/
+  - title: 第 7 章
+    details: shell 与代码执行
+    link: /ch07/
   - title: 后续章节
-    details: 第 7–16 章正文已写好，会陆续推到站点。第 17–21 章仍是大纲。
+    details: 第 8–16 章正文已写好，会陆续推到站点。第 17–21 章仍是大纲。
 ---
