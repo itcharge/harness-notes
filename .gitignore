@@ -13,3 +13,7 @@ __pycache__/
 .pytest_cache/
 .mypy_cache/
 .ruff_cache/
+
+# 章节快照的运行时产物：跑 loop.agent / retrieval.evaluate 会写出来，不要提交
+codes/ch*/harnex_v*/sessions/
+codes/ch*/harnex_v*/index.json

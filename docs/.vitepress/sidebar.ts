@@ -91,4 +91,18 @@ export const sidebar: DefaultTheme.Sidebar = [
       { text: '本章小结与验收', link: '/ch07/07_99_summary' },
     ],
   },
+  {
+    text: '第 8 章 检索增强：让 Agent 会查资料',
+    link: '/ch08/',
+    collapsed: false,
+    items: [
+      { text: '8.1 为什么 LLM 需要外挂知识', link: '/ch08/08_01_why_retrieval' },
+      { text: '8.2 向量检索的最小工作集', link: '/ch08/08_02_vector_search' },
+      { text: '8.3 检索质量的三处改动', link: '/ch08/08_03_retrieval_quality' },
+      { text: '8.4 Agentic RAG：把检索变成技能', link: '/ch08/08_04_agentic_rag' },
+      { text: '8.5 代码库检索：Harnex 的专属用法', link: '/ch08/08_05_code_search' },
+      { text: '8.6 评测一小步：朴素 RAG vs Agentic RAG', link: '/ch08/08_06_rag_eval' },
+      { text: '本章小结与验收', link: '/ch08/08_99_summary' },
+    ],
+  },
 ]
