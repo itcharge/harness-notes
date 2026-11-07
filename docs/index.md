@@ -38,6 +38,12 @@ features:
   - title: 第 8 章
     details: 检索增强：让 Agent 会查资料
     link: /ch08/
+  - title: 第 9 章
+    details: 规划与长任务
+    link: /ch09/
+  - title: 第 10 章
+    details: 可靠性：让 Agent 不再抽风
+    link: /ch10/
   - title: 后续章节
-    details: 第 9–16 章正文已写好，会陆续推到站点。第 17–21 章仍是大纲。
+    details: 第 11–16 章正文已写好，会陆续推到站点。第 17–21 章仍是大纲。
 ---

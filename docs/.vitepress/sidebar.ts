@@ -105,4 +105,31 @@ export const sidebar: DefaultTheme.Sidebar = [
       { text: '本章小结与验收', link: '/ch08/08_99_summary' },
     ],
   },
+  {
+    text: '第 9 章 规划与长任务',
+    link: '/ch09/',
+    collapsed: false,
+    items: [
+      { text: '9.1 长任务的三种失控方式', link: '/ch09/09_01_long_task_failure_modes' },
+      { text: '9.2 待办清单模式：先规划，再执行', link: '/ch09/09_02_todo_planning' },
+      { text: '9.3 自我反思与中途修正', link: '/ch09/09_03_self_reflection' },
+      { text: '9.4 什么才算「规划好了」：可检验性与粒度', link: '/ch09/09_04_verifiable_plans' },
+      { text: '9.5 何时才该拆多 Agent', link: '/ch09/09_05_when_to_split_agents' },
+      { text: '本章小结与验收', link: '/ch09/09_99_summary' },
+    ],
+  },
+  {
+    text: '第 10 章 可靠性：让 Agent 不再抽风',
+    link: '/ch10/',
+    collapsed: false,
+    items: [
+      { text: '10.1 你面对的是一个非确定性系统', link: '/ch10/10_01_nondeterministic_system' },
+      { text: '10.2 结构化输出：把自由文本关进笼子', link: '/ch10/10_02_structured_output' },
+      { text: '10.3 超时、退避与熔断', link: '/ch10/10_03_timeout_backoff_circuit_breaker' },
+      { text: '10.4 状态持久化与断点恢复', link: '/ch10/10_04_state_persistence_and_resume' },
+      { text: '10.5 失败的可解释性：两套受众', link: '/ch10/10_05_explainable_failures' },
+      { text: '10.6 量化：成功率是可测量的', link: '/ch10/10_06_measuring_success_rate' },
+      { text: '本章小结与验收', link: '/ch10/10_99_summary' },
+    ],
+  },
 ]
