@@ -111,7 +111,7 @@ Agent 会花钱，也会花时间让人等。
 
 | 指标       | 全称                    | 量度什么           |
 | -------- | --------------------- | -------------- |
-| **TTFT** | Time to First Token   | 从发出请求到第一个字出现   |
+| **TTFT** | Time to First Token   | 从发出请求到第一个可见 token 出现 |
 | **TPOT** | Time per Output Token | 每个输出 token 的耗时 |
 | **E2E**  | End-to-End            | 从提问到答案说完的总时长   |
 
