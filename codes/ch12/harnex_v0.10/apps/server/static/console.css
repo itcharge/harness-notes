@@ -1,0 +1,8 @@
+/* harnex/apps/server/static/console.css —— 窄屏下把侧栏收起来，让时间线占满 */
+.console { display: grid; grid-template-columns: 260px 1fr; height: 100vh; }
+
+@media (max-width: 720px) {
+  .console { grid-template-columns: 1fr; }      /* 侧栏收起，改从顶部抽屉打开 */
+  .sidebar  { display: none; }
+  .composer { position: sticky; bottom: 0; }    /* 输入框常驻底部 */
+}
