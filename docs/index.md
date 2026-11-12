@@ -44,6 +44,12 @@ features:
   - title: 第 10 章
     details: 可靠性：让 Agent 不再抽风
     link: /ch10/
+  - title: 第 11 章
+    details: 交互形态与全端雏形
+    link: /ch11/
+  - title: 第 12 章
+    details: 可观测性与成本
+    link: /ch12/
   - title: 后续章节
-    details: 第 11–16 章正文已写好，会陆续推到站点。第 17–21 章仍是大纲。
+    details: 第 13–16 章正文已写好，会陆续推到站点。第 17–21 章仍是大纲。
 ---

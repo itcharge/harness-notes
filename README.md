@@ -122,7 +122,7 @@ Harnex 是这套教程里唯一跟做的项目。它是一套 Agent 运行底座
 | [第 17 章 案例一：企业知识库问答 Agent](chapters/ch17-kb-qa-agent.md)             | 带权限、来源和拒答边界的知识库问答          | 🚧 7 节 |
 | [第 18 章 案例二：数据分析 Agent](chapters/ch18-data-analysis-agent.md)        | 在沙箱里分析数据，并生成可以核对的报告        | 🚧 7 节 |
 | [第 19 章 案例三：Computer Use 与 GUI Agent](chapters/ch19-computer-use.md) | 把看页面、点击和填表做成可插拔能力          | 🚧 6 节 |
-| [第 20 章 分发、插件生态与运营](chapters/ch20-distribution-ecosystem.md)         | 安装包、插件、反馈闭环和上架路径。**L4 达标** | 🚧 6 节 |
+| [第 20 章 分发、插件生态与运营](chapters/ch20-distribution-ecosystem.md)         | 安装包、插件、用户反馈和上架路径。**L4 达标** | 🚧 6 节 |
 | [第 21 章 毕业设计](chapters/ch21-capstone.md)                             | 开发者赛道或大众赛道，按 L4 标准验收       | 🚧 5 节 |
 
 
@@ -149,7 +149,7 @@ Harnex 运行时
 
 ## 配套代码
 
-- [codes/](codes/README.md) 里有两部分：`codes/ch01`–`codes/ch03` 与 `codes/ch13`–`codes/ch16` 是正文代码块的逐字节提取；第 4–12 章的代码在各章的 `harnex_v0.x/` 里，正文直接引用。`codes/harnex/` 是组装起来的项目，当前到第 16 章（v1.6.1：无特权核心加插件，结构见 [ARCHITECTURE.md](codes/harnex/ARCHITECTURE.md)）；`codes/harnex-langgraph/` 是第 14 章那个用状态图重写的对照项目，以外部插件的方式装进 Harnex。
+- [codes/](codes/README.md) 里有两部分：`codes/ch01`–`codes/ch03` 与 `codes/ch13`–`codes/ch16` 是正文代码块的逐字节提取；第 4–12 章的代码在各章的 `harnex_v0.x/` 里，正文直接引用。`codes/harnex/` 是组装起来的项目，当前到第 16 章（v1.3.1：无特权核心加插件，结构见 [ARCHITECTURE.md](codes/harnex/ARCHITECTURE.md)）；`codes/harnex-langgraph/` 是第 14 章那个用状态图重写的对照项目，以外部插件的方式装进 Harnex。
 - 提取出的文件可编译，并在桩环境跑通。校验方式见 [codes/VERIFY.md](codes/VERIFY.md)。
 - 正文索引在 [docs/index.md](docs/index.md)，逐节目录在 [extra/toc-v6.md](extra/toc-v6.md)，未成稿章节的大纲在 [chapters/README.md](chapters/README.md)。
 
